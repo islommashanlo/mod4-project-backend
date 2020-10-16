@@ -1082,3 +1082,350 @@ Processing by UsersController#show as HTML
 Completed 200 OK in 135ms (Views: 69.1ms | ActiveRecord: 19.9ms | Allocations: 44449)
 
 
+  [1m[36mTransaction Load (0.8ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" ORDER BY "transactions"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mTransactionType Load (0.4ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+Started GET "/users/1" for ::1 at 2020-10-16 14:51:59 -0400
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:23:in `find_user'
+[active_model_serializers]   [1m[36mTransaction Load (0.3ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."user_id" = $1[0m  [["user_id", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:5:in `account_balance'
+[active_model_serializers]   [1m[36mAccount Load (0.3ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."user_id" = $1[0m  [["user_id", "1"]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:9:in `map'
+[active_model_serializers]   [1m[36mBank Load (0.2ms)[0m  [1m[34mSELECT "banks".* FROM "banks" WHERE "banks"."account_id" = $1[0m  [["account_id", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:9:in `flatten'
+[active_model_serializers]   [1m[36mTransactionType Load (0.3ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCACHE TransactionType Load (0.0ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCACHE TransactionType Load (0.0ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCACHE TransactionType Load (0.0ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCACHE TransactionType Load (0.0ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCACHE TransactionType Load (0.0ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCACHE TransactionType Load (0.0ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mTransactionType Load (0.3ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCACHE TransactionType Load (0.0ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCACHE TransactionType Load (0.0ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCACHE TransactionType Load (0.0ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers] Rendered UserSerializer with ActiveModelSerializers::Adapter::Attributes (73.29ms)
+Completed 200 OK in 94ms (Views: 63.9ms | ActiveRecord: 18.0ms | Allocations: 49950)
+
+
+Started GET "/users/1" for ::1 at 2020-10-16 14:52:32 -0400
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:23:in `find_user'
+[active_model_serializers]   [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."user_id" = $1[0m  [["user_id", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:5:in `account_balance'
+[active_model_serializers]   [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."user_id" = $1[0m  [["user_id", "1"]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:9:in `map'
+[active_model_serializers]   [1m[36mBank Load (0.1ms)[0m  [1m[34mSELECT "banks".* FROM "banks" WHERE "banks"."account_id" = $1[0m  [["account_id", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:9:in `flatten'
+[active_model_serializers]   [1m[36mTransactionType Load (0.2ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCACHE TransactionType Load (0.0ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCACHE TransactionType Load (0.0ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCACHE TransactionType Load (0.0ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCACHE TransactionType Load (0.0ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCACHE TransactionType Load (0.0ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCACHE TransactionType Load (0.0ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mTransactionType Load (0.2ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCACHE TransactionType Load (0.0ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCACHE TransactionType Load (0.0ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCACHE TransactionType Load (0.0ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:17:in `block in debit_categories'
+[active_model_serializers]   [1m[36mCACHE Category Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:17:in `block in debit_categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:17:in `block in debit_categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:17:in `block in debit_categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:17:in `block in debit_categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 9], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:17:in `block in debit_categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 10], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:17:in `block in debit_categories'
+[active_model_serializers] Rendered UserSerializer with ActiveModelSerializers::Adapter::Attributes (98.56ms)
+Completed 200 OK in 120ms (Views: 89.1ms | ActiveRecord: 13.7ms | Allocations: 50981)
+
+
+Started GET "/users/1" for ::1 at 2020-10-16 14:53:17 -0400
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:23:in `find_user'
+[active_model_serializers]   [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."user_id" = $1[0m  [["user_id", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:5:in `account_balance'
+[active_model_serializers]   [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."user_id" = $1[0m  [["user_id", "1"]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:9:in `map'
+[active_model_serializers]   [1m[36mBank Load (0.1ms)[0m  [1m[34mSELECT "banks".* FROM "banks" WHERE "banks"."account_id" = $1[0m  [["account_id", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:9:in `flatten'
+[active_model_serializers]   [1m[36mTransactionType Load (0.1ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCACHE TransactionType Load (0.0ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCACHE TransactionType Load (0.0ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCACHE TransactionType Load (0.0ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCACHE TransactionType Load (0.0ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCACHE TransactionType Load (0.0ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCACHE TransactionType Load (0.0ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mTransactionType Load (0.2ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCACHE TransactionType Load (0.0ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCACHE TransactionType Load (0.0ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCACHE TransactionType Load (0.0ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:17:in `block in debit_categories'
+[active_model_serializers]   [1m[36mCACHE Category Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:17:in `block in debit_categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:17:in `block in debit_categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:17:in `block in debit_categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:17:in `block in debit_categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 9], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:17:in `block in debit_categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 10], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:17:in `block in debit_categories'
+[active_model_serializers] Rendered UserSerializer with ActiveModelSerializers::Adapter::Attributes (59.2ms)
+Completed 200 OK in 73ms (Views: 50.2ms | ActiveRecord: 13.6ms | Allocations: 51010)
+
+
+Started GET "/users/1" for ::1 at 2020-10-16 14:53:42 -0400
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:23:in `find_user'
+[active_model_serializers]   [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."user_id" = $1[0m  [["user_id", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:5:in `account_balance'
+[active_model_serializers]   [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."user_id" = $1[0m  [["user_id", "1"]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:9:in `map'
+[active_model_serializers]   [1m[36mBank Load (0.1ms)[0m  [1m[34mSELECT "banks".* FROM "banks" WHERE "banks"."account_id" = $1[0m  [["account_id", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:9:in `flatten'
+[active_model_serializers]   [1m[36mTransactionType Load (0.1ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCACHE TransactionType Load (0.0ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCACHE TransactionType Load (0.0ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCACHE TransactionType Load (0.0ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCACHE TransactionType Load (0.0ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCACHE TransactionType Load (0.0ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCACHE TransactionType Load (0.0ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mTransactionType Load (0.1ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCACHE TransactionType Load (0.0ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCACHE TransactionType Load (0.0ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCACHE TransactionType Load (0.0ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:17:in `block in debit_categories'
+[active_model_serializers]   [1m[36mCACHE Category Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:17:in `block in debit_categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:17:in `block in debit_categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:17:in `block in debit_categories'
+[active_model_serializers]   [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:17:in `block in debit_categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 9], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:17:in `block in debit_categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 10], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:17:in `block in debit_categories'
+[active_model_serializers] Rendered UserSerializer with ActiveModelSerializers::Adapter::Attributes (70.97ms)
+Completed 200 OK in 83ms (Views: 61.9ms | ActiveRecord: 12.9ms | Allocations: 51013)
+
+
+Started GET "/users/1" for ::1 at 2020-10-16 14:54:47 -0400
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:23:in `find_user'
+[active_model_serializers]   [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."user_id" = $1[0m  [["user_id", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:5:in `account_balance'
+[active_model_serializers]   [1m[36mAccount Load (0.2ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."user_id" = $1[0m  [["user_id", "1"]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:9:in `map'
+[active_model_serializers]   [1m[36mBank Load (0.2ms)[0m  [1m[34mSELECT "banks".* FROM "banks" WHERE "banks"."account_id" = $1[0m  [["account_id", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:9:in `flatten'
+[active_model_serializers]   [1m[36mTransactionType Load (0.1ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCACHE TransactionType Load (0.0ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCACHE TransactionType Load (0.0ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCACHE TransactionType Load (0.0ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCACHE TransactionType Load (0.0ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCACHE TransactionType Load (0.0ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCACHE TransactionType Load (0.0ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mTransactionType Load (0.2ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCACHE TransactionType Load (0.0ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCACHE TransactionType Load (0.0ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCACHE TransactionType Load (0.0ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:17:in `block in debit_categories'
+[active_model_serializers]   [1m[36mCACHE Category Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:17:in `block in debit_categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:17:in `block in debit_categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:17:in `block in debit_categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:17:in `block in debit_categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 9], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:17:in `block in debit_categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 10], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:17:in `block in debit_categories'
+[active_model_serializers]   [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions"[0m
+[active_model_serializers]   ↳ app/controllers/users_controller.rb:6:in `show'
+[active_model_serializers] Rendered UserSerializer with ActiveModelSerializers::Adapter::Attributes (61.98ms)
+Completed 200 OK in 76ms (Views: 51.9ms | ActiveRecord: 14.5ms | Allocations: 53731)
+
+
+Started GET "/users/1" for ::1 at 2020-10-16 14:57:08 -0400
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:23:in `find_user'
+[active_model_serializers]   [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."user_id" = $1[0m  [["user_id", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:5:in `account_balance'
+[active_model_serializers]   [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."user_id" = $1[0m  [["user_id", "1"]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:9:in `map'
+[active_model_serializers]   [1m[36mBank Load (0.1ms)[0m  [1m[34mSELECT "banks".* FROM "banks" WHERE "banks"."account_id" = $1[0m  [["account_id", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:9:in `flatten'
+[active_model_serializers]   [1m[36mTransactionType Load (0.1ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCACHE TransactionType Load (0.0ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCACHE TransactionType Load (0.0ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCACHE TransactionType Load (0.0ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCACHE TransactionType Load (0.0ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCACHE TransactionType Load (0.0ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCACHE TransactionType Load (0.0ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mTransactionType Load (0.2ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCACHE TransactionType Load (0.0ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCACHE TransactionType Load (0.0ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCACHE TransactionType Load (0.0ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in credit_categories'
+[active_model_serializers]   [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:17:in `block in debit_categories'
+[active_model_serializers]   [1m[36mCACHE Category Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:17:in `block in debit_categories'
+[active_model_serializers]   [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:17:in `block in debit_categories'
+[active_model_serializers]   [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:17:in `block in debit_categories'
+[active_model_serializers]   [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:17:in `block in debit_categories'
+[active_model_serializers]   [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 9], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:17:in `block in debit_categories'
+[active_model_serializers]   [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 10], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:17:in `block in debit_categories'
+[active_model_serializers]   [1m[36mTransactionType Load (0.2ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types"[0m
+[active_model_serializers]   ↳ app/controllers/users_controller.rb:6:in `show'
+[active_model_serializers] Rendered UserSerializer with ActiveModelSerializers::Adapter::Attributes (62.44ms)
+Completed 200 OK in 77ms (Views: 52.5ms | ActiveRecord: 15.1ms | Allocations: 52239)
+
+
