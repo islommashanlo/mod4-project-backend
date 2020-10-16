@@ -10,11 +10,11 @@ class UserSerializer < ActiveModel::Serializer
     end
 
     def categories
-        self.object.transactions.map{|e|e.category}
+        self.object.transactions.map{|e|e.category}.uniq
     end
 
     def transactions
         self.object.transactions
     end
-    
+
 end
