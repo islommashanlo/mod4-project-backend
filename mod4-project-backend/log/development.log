@@ -49,3 +49,998 @@ Migrating to CreateAccounts (20201015172624)
   [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
   [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
   [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (1.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (44.0ms)[0m  [1m[35mDROP DATABASE IF EXISTS "ironbudget_backend_development"[0m
+  [1m[35m (24.9ms)[0m  [1m[35mDROP DATABASE IF EXISTS "ironbudget_backend_test"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP DATABASE IF EXISTS "ironbudget_backend_development"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP DATABASE IF EXISTS "ironbudget_backend_test"[0m
+  [1m[35m (138.8ms)[0m  [1m[35mCREATE DATABASE "ironbudget_backend_development" ENCODING = 'unicode'[0m
+  [1m[35m (62.0ms)[0m  [1m[35mCREATE DATABASE "ironbudget_backend_test" ENCODING = 'unicode'[0m
+  [1m[35m (10.3ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (2.1ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(3827025779731353570)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateUsers (20201015172426)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (4.8ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "username" character varying, "first_name" character varying, "last_name" character varying, "address" character varying)[0m
+  [1m[36mprimary::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20201015172426"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateCategories (20201015172456)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (4.0ms)[0m  [1m[35mCREATE TABLE "categories" ("id" bigserial primary key, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "name" character varying)[0m
+  [1m[36mprimary::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20201015172456"]]
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateTransactionTypes (20201015172505)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (4.0ms)[0m  [1m[35mCREATE TABLE "transaction_types" ("id" bigserial primary key, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "name" character varying)[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20201015172505"]]
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateTransactions (20201015172551)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (4.7ms)[0m  [1m[35mCREATE TABLE "transactions" ("id" bigserial primary key, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "name" character varying, "amount" float, "t_date" timestamp, "category_id" integer, "transaction_type_id" integer)[0m
+  [1m[36mprimary::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20201015172551"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateBudgets (20201015172606)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (4.3ms)[0m  [1m[35mCREATE TABLE "budgets" ("id" bigserial primary key, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "name" character varying, "category_id" integer, "user_id" integer)[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20201015172606"]]
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateBanks (20201015172613)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (4.7ms)[0m  [1m[35mCREATE TABLE "banks" ("id" bigserial primary key, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "name" character varying, "account_id" integer)[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20201015172613"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateAccounts (20201015172624)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3.9ms)[0m  [1m[35mCREATE TABLE "accounts" ("id" bigserial primary key, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "user_id" character varying)[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20201015172624"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2020-10-16 14:35:44.889478"], ["updated_at", "2020-10-16 14:35:44.889478"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(3827025779731353570)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (22.8ms)[0m  [1m[35mDROP DATABASE IF EXISTS "ironbudget_backend_development"[0m
+  [1m[35m (19.7ms)[0m  [1m[35mDROP DATABASE IF EXISTS "ironbudget_backend_test"[0m
+  [1m[35m (53.4ms)[0m  [1m[35mCREATE DATABASE "ironbudget_backend_development" ENCODING = 'unicode'[0m
+  [1m[35m (55.0ms)[0m  [1m[35mCREATE DATABASE "ironbudget_backend_test" ENCODING = 'unicode'[0m
+  [1m[35m (3.4ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (1.9ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(3827025779731353570)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateUsers (20201015172426)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.4ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "username" character varying, "first_name" character varying, "last_name" character varying, "address" character varying)[0m
+  [1m[36mprimary::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20201015172426"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateCategories (20201015172456)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.6ms)[0m  [1m[35mCREATE TABLE "categories" ("id" bigserial primary key, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "name" character varying)[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20201015172456"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateTransactionTypes (20201015172505)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.9ms)[0m  [1m[35mCREATE TABLE "transaction_types" ("id" bigserial primary key, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "name" character varying)[0m
+  [1m[36mprimary::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20201015172505"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateTransactions (20201015172551)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (4.5ms)[0m  [1m[35mCREATE TABLE "transactions" ("id" bigserial primary key, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "name" character varying, "amount" float, "t_date" timestamp, "category_id" integer, "transaction_type_id" integer, "user_id" integer)[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20201015172551"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateBudgets (20201015172606)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.5ms)[0m  [1m[35mCREATE TABLE "budgets" ("id" bigserial primary key, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "name" character varying, "category_id" integer, "user_id" integer)[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20201015172606"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateBanks (20201015172613)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.9ms)[0m  [1m[35mCREATE TABLE "banks" ("id" bigserial primary key, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "name" character varying, "account_id" integer)[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20201015172613"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateAccounts (20201015172624)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.4ms)[0m  [1m[35mCREATE TABLE "accounts" ("id" bigserial primary key, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "user_id" character varying)[0m
+  [1m[36mprimary::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20201015172624"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2020-10-16 14:43:53.848771"], ["updated_at", "2020-10-16 14:43:53.848771"]]
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(3827025779731353570)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (22.6ms)[0m  [1m[35mDROP DATABASE IF EXISTS "ironbudget_backend_development"[0m
+  [1m[35m (20.3ms)[0m  [1m[35mDROP DATABASE IF EXISTS "ironbudget_backend_test"[0m
+  [1m[35m (51.3ms)[0m  [1m[35mCREATE DATABASE "ironbudget_backend_development" ENCODING = 'unicode'[0m
+  [1m[35m (59.8ms)[0m  [1m[35mCREATE DATABASE "ironbudget_backend_test" ENCODING = 'unicode'[0m
+  [1m[35m (3.4ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (1.9ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(3827025779731353570)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateUsers (20201015172426)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.5ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "username" character varying, "first_name" character varying, "last_name" character varying, "address" character varying)[0m
+  [1m[36mprimary::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20201015172426"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateCategories (20201015172456)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.4ms)[0m  [1m[35mCREATE TABLE "categories" ("id" bigserial primary key, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "name" character varying)[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20201015172456"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateTransactionTypes (20201015172505)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.9ms)[0m  [1m[35mCREATE TABLE "transaction_types" ("id" bigserial primary key, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "name" character varying)[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20201015172505"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateTransactions (20201015172551)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.4ms)[0m  [1m[35mCREATE TABLE "transactions" ("id" bigserial primary key, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "name" character varying, "amount" float, "t_date" timestamp, "category_id" integer, "transaction_type_id" integer, "user_id" integer)[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20201015172551"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateBudgets (20201015172606)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (4.2ms)[0m  [1m[35mCREATE TABLE "budgets" ("id" bigserial primary key, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "name" character varying, "amount" float, "category_id" integer, "user_id" integer)[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20201015172606"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateBanks (20201015172613)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.6ms)[0m  [1m[35mCREATE TABLE "banks" ("id" bigserial primary key, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "name" character varying, "account_id" integer)[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20201015172613"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateAccounts (20201015172624)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.1ms)[0m  [1m[35mCREATE TABLE "accounts" ("id" bigserial primary key, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "user_id" character varying)[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20201015172624"]]
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.8ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2020-10-16 14:45:37.902153"], ["updated_at", "2020-10-16 14:45:37.902153"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(3827025779731353570)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (1.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransactionType Create (3.0ms)[0m  [1m[32mINSERT INTO "transaction_types" ("created_at", "updated_at", "name") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2020-10-16 17:31:52.115902"], ["updated_at", "2020-10-16 17:31:52.115902"], ["name", "Credit"]]
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransactionType Create (0.2ms)[0m  [1m[32mINSERT INTO "transaction_types" ("created_at", "updated_at", "name") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2020-10-16 17:31:52.123634"], ["updated_at", "2020-10-16 17:31:52.123634"], ["name", "Debit"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (1.1ms)[0m  [1m[32mINSERT INTO "categories" ("created_at", "updated_at", "name") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2020-10-16 17:31:52.136181"], ["updated_at", "2020-10-16 17:31:52.136181"], ["name", "Income"]]
+  [1m[35m (17.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.3ms)[0m  [1m[32mINSERT INTO "categories" ("created_at", "updated_at", "name") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2020-10-16 17:31:52.158282"], ["updated_at", "2020-10-16 17:31:52.158282"], ["name", "Refunds"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.3ms)[0m  [1m[32mINSERT INTO "categories" ("created_at", "updated_at", "name") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2020-10-16 17:31:52.162479"], ["updated_at", "2020-10-16 17:31:52.162479"], ["name", "Gifts"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.2ms)[0m  [1m[32mINSERT INTO "categories" ("created_at", "updated_at", "name") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2020-10-16 17:31:52.165986"], ["updated_at", "2020-10-16 17:31:52.165986"], ["name", "Miscellaneous"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.2ms)[0m  [1m[32mINSERT INTO "categories" ("created_at", "updated_at", "name") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2020-10-16 17:31:52.168969"], ["updated_at", "2020-10-16 17:31:52.168969"], ["name", "Bills"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.2ms)[0m  [1m[32mINSERT INTO "categories" ("created_at", "updated_at", "name") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2020-10-16 17:31:52.171987"], ["updated_at", "2020-10-16 17:31:52.171987"], ["name", "Groceries"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.2ms)[0m  [1m[32mINSERT INTO "categories" ("created_at", "updated_at", "name") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2020-10-16 17:31:52.174847"], ["updated_at", "2020-10-16 17:31:52.174847"], ["name", "Entertainment"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.2ms)[0m  [1m[32mINSERT INTO "categories" ("created_at", "updated_at", "name") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2020-10-16 17:31:52.177764"], ["updated_at", "2020-10-16 17:31:52.177764"], ["name", "Dining Out"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.4ms)[0m  [1m[32mINSERT INTO "categories" ("created_at", "updated_at", "name") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2020-10-16 17:31:52.180404"], ["updated_at", "2020-10-16 17:31:52.180404"], ["name", "Transportation"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.1ms)[0m  [1m[32mINSERT INTO "categories" ("created_at", "updated_at", "name") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2020-10-16 17:31:52.183786"], ["updated_at", "2020-10-16 17:31:52.183786"], ["name", "Miscellaneous"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (2.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER($1) LIMIT $2[0m  [["username", "isa"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "username", "first_name", "last_name", "address") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["created_at", "2020-10-16 17:31:52.230872"], ["updated_at", "2020-10-16 17:31:52.230872"], ["username", "isa"], ["first_name", "Isa"], ["last_name", "Akhmedov"], ["address", "7205 17th Avenue, Brooklyn, NY"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (2.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mAccount Create (1.1ms)[0m  [1m[32mINSERT INTO "accounts" ("created_at", "updated_at", "user_id") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2020-10-16 17:31:52.279299"], ["updated_at", "2020-10-16 17:31:52.279299"], ["user_id", "1"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (15.9ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAccount Load (0.3ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mBank Create (1.1ms)[0m  [1m[32mINSERT INTO "banks" ("created_at", "updated_at", "name", "account_id") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["created_at", "2020-10-16 17:31:52.309903"], ["updated_at", "2020-10-16 17:31:52.309903"], ["name", "Chase"], ["account_id", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransactionType Load (0.2ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTransaction Create (2.5ms)[0m  [1m[32mINSERT INTO "transactions" ("created_at", "updated_at", "name", "amount", "t_date", "category_id", "transaction_type_id", "user_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["created_at", "2020-10-16 17:31:52.330874"], ["updated_at", "2020-10-16 17:31:52.330874"], ["name", "Car Payment"], ["amount", 500.0], ["t_date", "2020-10-16 17:31:52.315547"], ["category_id", 5], ["transaction_type_id", 2], ["user_id", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransactionType Load (0.2ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTransaction Create (16.7ms)[0m  [1m[32mINSERT INTO "transactions" ("created_at", "updated_at", "name", "amount", "t_date", "category_id", "transaction_type_id", "user_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["created_at", "2020-10-16 17:31:52.339494"], ["updated_at", "2020-10-16 17:31:52.339494"], ["name", "Rent"], ["amount", 1500.0], ["t_date", "2020-10-16 17:31:52.335416"], ["category_id", 5], ["transaction_type_id", 2], ["user_id", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransactionType Load (0.2ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTransaction Create (0.2ms)[0m  [1m[32mINSERT INTO "transactions" ("created_at", "updated_at", "name", "amount", "t_date", "category_id", "transaction_type_id", "user_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["created_at", "2020-10-16 17:31:52.364304"], ["updated_at", "2020-10-16 17:31:52.364304"], ["name", "Shopping"], ["amount", 100.0], ["t_date", "2020-10-16 17:31:52.358911"], ["category_id", 6], ["transaction_type_id", 2], ["user_id", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransactionType Load (0.2ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTransaction Create (0.3ms)[0m  [1m[32mINSERT INTO "transactions" ("created_at", "updated_at", "name", "amount", "t_date", "category_id", "transaction_type_id", "user_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["created_at", "2020-10-16 17:31:52.370361"], ["updated_at", "2020-10-16 17:31:52.370361"], ["name", "Movies"], ["amount", 100.0], ["t_date", "2020-10-16 17:31:52.366350"], ["category_id", 7], ["transaction_type_id", 2], ["user_id", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransactionType Load (0.2ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTransaction Create (0.2ms)[0m  [1m[32mINSERT INTO "transactions" ("created_at", "updated_at", "name", "amount", "t_date", "category_id", "transaction_type_id", "user_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["created_at", "2020-10-16 17:31:52.387272"], ["updated_at", "2020-10-16 17:31:52.387272"], ["name", "Restaurant"], ["amount", 100.0], ["t_date", "2020-10-16 17:31:52.372229"], ["category_id", 8], ["transaction_type_id", 2], ["user_id", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransactionType Load (16.5ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 9], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTransaction Create (0.3ms)[0m  [1m[32mINSERT INTO "transactions" ("created_at", "updated_at", "name", "amount", "t_date", "category_id", "transaction_type_id", "user_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["created_at", "2020-10-16 17:31:52.411601"], ["updated_at", "2020-10-16 17:31:52.411601"], ["name", "Train"], ["amount", 100.0], ["t_date", "2020-10-16 17:31:52.389097"], ["category_id", 9], ["transaction_type_id", 2], ["user_id", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransactionType Load (0.1ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 10], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTransaction Create (0.2ms)[0m  [1m[32mINSERT INTO "transactions" ("created_at", "updated_at", "name", "amount", "t_date", "category_id", "transaction_type_id", "user_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["created_at", "2020-10-16 17:31:52.418994"], ["updated_at", "2020-10-16 17:31:52.418994"], ["name", "Gift"], ["amount", 100.0], ["t_date", "2020-10-16 17:31:52.414174"], ["category_id", 10], ["transaction_type_id", 2], ["user_id", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransactionType Load (0.1ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTransaction Create (0.3ms)[0m  [1m[32mINSERT INTO "transactions" ("created_at", "updated_at", "name", "amount", "t_date", "category_id", "transaction_type_id", "user_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["created_at", "2020-10-16 17:31:52.424878"], ["updated_at", "2020-10-16 17:31:52.424878"], ["name", "Salary"], ["amount", 100000.0], ["t_date", "2020-10-16 17:31:52.421076"], ["category_id", 1], ["transaction_type_id", 1], ["user_id", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransactionType Load (0.1ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTransaction Create (0.2ms)[0m  [1m[32mINSERT INTO "transactions" ("created_at", "updated_at", "name", "amount", "t_date", "category_id", "transaction_type_id", "user_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["created_at", "2020-10-16 17:31:52.430439"], ["updated_at", "2020-10-16 17:31:52.430439"], ["name", "Refund"], ["amount", 0.5], ["t_date", "2020-10-16 17:31:52.426789"], ["category_id", 2], ["transaction_type_id", 1], ["user_id", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransactionType Load (0.2ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTransaction Create (0.2ms)[0m  [1m[32mINSERT INTO "transactions" ("created_at", "updated_at", "name", "amount", "t_date", "category_id", "transaction_type_id", "user_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["created_at", "2020-10-16 17:31:52.438477"], ["updated_at", "2020-10-16 17:31:52.438477"], ["name", "Present"], ["amount", 1.0], ["t_date", "2020-10-16 17:31:52.432761"], ["category_id", 3], ["transaction_type_id", 1], ["user_id", 1]]
+  [1m[35m (17.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransactionType Load (0.2ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTransaction Create (0.2ms)[0m  [1m[32mINSERT INTO "transactions" ("created_at", "updated_at", "name", "amount", "t_date", "category_id", "transaction_type_id", "user_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["created_at", "2020-10-16 17:31:52.463887"], ["updated_at", "2020-10-16 17:31:52.463887"], ["name", "Portfolio"], ["amount", 6.66], ["t_date", "2020-10-16 17:31:52.457918"], ["category_id", 4], ["transaction_type_id", 1], ["user_id", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTransaction Load (3.8ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" ORDER BY "transactions"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mTransaction Load (0.4ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" ORDER BY "transactions"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" ORDER BY "transactions"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mBudget Create (0.7ms)[0m  [1m[32mINSERT INTO "budgets" ("created_at", "updated_at", "name", "amount", "category_id", "user_id") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["created_at", "2020-10-16 17:31:52.487938"], ["updated_at", "2020-10-16 17:31:52.487938"], ["name", "Car Payment"], ["amount", 500.0], ["category_id", 5], ["user_id", 1]]
+  [1m[35m (16.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" ORDER BY "transactions"."id" ASC LIMIT $1 OFFSET $2[0m  [["LIMIT", 1], ["OFFSET", 1]]
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" ORDER BY "transactions"."id" ASC LIMIT $1 OFFSET $2[0m  [["LIMIT", 1], ["OFFSET", 1]]
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" ORDER BY "transactions"."id" ASC LIMIT $1 OFFSET $2[0m  [["LIMIT", 1], ["OFFSET", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mBudget Create (0.2ms)[0m  [1m[32mINSERT INTO "budgets" ("created_at", "updated_at", "name", "amount", "category_id", "user_id") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["created_at", "2020-10-16 17:31:52.523373"], ["updated_at", "2020-10-16 17:31:52.523373"], ["name", "Rent"], ["amount", 1500.0], ["category_id", 5], ["user_id", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" ORDER BY "transactions"."id" ASC LIMIT $1 OFFSET $2[0m  [["LIMIT", 1], ["OFFSET", 2]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" ORDER BY "transactions"."id" ASC LIMIT $1 OFFSET $2[0m  [["LIMIT", 1], ["OFFSET", 2]]
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" ORDER BY "transactions"."id" ASC LIMIT $1 OFFSET $2[0m  [["LIMIT", 1], ["OFFSET", 2]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[36mBudget Create (0.2ms)[0m  [1m[32mINSERT INTO "budgets" ("created_at", "updated_at", "name", "amount", "category_id", "user_id") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["created_at", "2020-10-16 17:31:52.531461"], ["updated_at", "2020-10-16 17:31:52.531461"], ["name", "Shopping"], ["amount", 100.0], ["category_id", 6], ["user_id", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" ORDER BY "transactions"."id" ASC LIMIT $1 OFFSET $2[0m  [["LIMIT", 1], ["OFFSET", 3]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" ORDER BY "transactions"."id" ASC LIMIT $1 OFFSET $2[0m  [["LIMIT", 1], ["OFFSET", 3]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" ORDER BY "transactions"."id" ASC LIMIT $1 OFFSET $2[0m  [["LIMIT", 1], ["OFFSET", 3]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[36mBudget Create (0.3ms)[0m  [1m[32mINSERT INTO "budgets" ("created_at", "updated_at", "name", "amount", "category_id", "user_id") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["created_at", "2020-10-16 17:31:52.538589"], ["updated_at", "2020-10-16 17:31:52.538589"], ["name", "Movies"], ["amount", 100.0], ["category_id", 7], ["user_id", 1]]
+  [1m[35m (17.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTransaction Load (0.3ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" ORDER BY "transactions"."id" ASC LIMIT $1 OFFSET $2[0m  [["LIMIT", 1], ["OFFSET", 4]]
+  [1m[36mTransaction Load (0.4ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" ORDER BY "transactions"."id" ASC LIMIT $1 OFFSET $2[0m  [["LIMIT", 1], ["OFFSET", 4]]
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" ORDER BY "transactions"."id" ASC LIMIT $1 OFFSET $2[0m  [["LIMIT", 1], ["OFFSET", 4]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+  [1m[36mBudget Create (0.2ms)[0m  [1m[32mINSERT INTO "budgets" ("created_at", "updated_at", "name", "amount", "category_id", "user_id") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["created_at", "2020-10-16 17:31:52.566748"], ["updated_at", "2020-10-16 17:31:52.566748"], ["name", "Restaurant"], ["amount", 100.0], ["category_id", 8], ["user_id", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mBudget Load (0.3ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (60.3ms)[0m  [1m[35mDROP DATABASE IF EXISTS "ironbudget_backend_development"[0m
+  [1m[35m (50.8ms)[0m  [1m[35mDROP DATABASE IF EXISTS "ironbudget_backend_test"[0m
+  [1m[35m (391.2ms)[0m  [1m[35mCREATE DATABASE "ironbudget_backend_development" ENCODING = 'unicode'[0m
+  [1m[35m (114.2ms)[0m  [1m[35mCREATE DATABASE "ironbudget_backend_test" ENCODING = 'unicode'[0m
+  [1m[35m (5.8ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (2.9ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(3827025779731353570)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateUsers (20201015172426)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3.8ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "username" character varying, "first_name" character varying, "last_name" character varying, "address" character varying)[0m
+  [1m[36mprimary::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20201015172426"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateCategories (20201015172456)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (4.1ms)[0m  [1m[35mCREATE TABLE "categories" ("id" bigserial primary key, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "name" character varying)[0m
+  [1m[36mprimary::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20201015172456"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateTransactionTypes (20201015172505)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (19.3ms)[0m  [1m[35mCREATE TABLE "transaction_types" ("id" bigserial primary key, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "name" character varying)[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20201015172505"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateTransactions (20201015172551)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (4.3ms)[0m  [1m[35mCREATE TABLE "transactions" ("id" bigserial primary key, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "name" character varying, "amount" float, "t_date" timestamp, "category_id" integer, "transaction_type_id" integer, "user_id" integer)[0m
+  [1m[36mprimary::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20201015172551"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateBudgets (20201015172606)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.8ms)[0m  [1m[35mCREATE TABLE "budgets" ("id" bigserial primary key, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "name" character varying, "amount" float, "category_id" integer, "user_id" integer)[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20201015172606"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateBanks (20201015172613)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (4.1ms)[0m  [1m[35mCREATE TABLE "banks" ("id" bigserial primary key, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "name" character varying, "account_id" integer)[0m
+  [1m[36mprimary::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20201015172613"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateAccounts (20201015172624)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (19.1ms)[0m  [1m[35mCREATE TABLE "accounts" ("id" bigserial primary key, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "user_id" character varying)[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20201015172624"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.5ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2020-10-16 17:32:43.170203"], ["updated_at", "2020-10-16 17:32:43.170203"]]
+  [1m[35m (16.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(3827025779731353570)[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransactionType Create (0.8ms)[0m  [1m[32mINSERT INTO "transaction_types" ("created_at", "updated_at", "name") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2020-10-16 17:35:36.424402"], ["updated_at", "2020-10-16 17:35:36.424402"], ["name", "Credit"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransactionType Create (0.1ms)[0m  [1m[32mINSERT INTO "transaction_types" ("created_at", "updated_at", "name") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2020-10-16 17:35:36.428451"], ["updated_at", "2020-10-16 17:35:36.428451"], ["name", "Debit"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (17.8ms)[0m  [1m[32mINSERT INTO "categories" ("created_at", "updated_at", "name") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2020-10-16 17:35:36.437942"], ["updated_at", "2020-10-16 17:35:36.437942"], ["name", "Income"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.2ms)[0m  [1m[32mINSERT INTO "categories" ("created_at", "updated_at", "name") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2020-10-16 17:35:36.459647"], ["updated_at", "2020-10-16 17:35:36.459647"], ["name", "Refunds"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.2ms)[0m  [1m[32mINSERT INTO "categories" ("created_at", "updated_at", "name") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2020-10-16 17:35:36.463269"], ["updated_at", "2020-10-16 17:35:36.463269"], ["name", "Gifts"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.2ms)[0m  [1m[32mINSERT INTO "categories" ("created_at", "updated_at", "name") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2020-10-16 17:35:36.466146"], ["updated_at", "2020-10-16 17:35:36.466146"], ["name", "Miscellaneous"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.1ms)[0m  [1m[32mINSERT INTO "categories" ("created_at", "updated_at", "name") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2020-10-16 17:35:36.469036"], ["updated_at", "2020-10-16 17:35:36.469036"], ["name", "Bills"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.2ms)[0m  [1m[32mINSERT INTO "categories" ("created_at", "updated_at", "name") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2020-10-16 17:35:36.471567"], ["updated_at", "2020-10-16 17:35:36.471567"], ["name", "Groceries"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.1ms)[0m  [1m[32mINSERT INTO "categories" ("created_at", "updated_at", "name") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2020-10-16 17:35:36.475398"], ["updated_at", "2020-10-16 17:35:36.475398"], ["name", "Entertainment"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.1ms)[0m  [1m[32mINSERT INTO "categories" ("created_at", "updated_at", "name") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2020-10-16 17:35:36.477922"], ["updated_at", "2020-10-16 17:35:36.477922"], ["name", "Dining Out"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (13.9ms)[0m  [1m[32mINSERT INTO "categories" ("created_at", "updated_at", "name") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2020-10-16 17:35:36.480437"], ["updated_at", "2020-10-16 17:35:36.480437"], ["name", "Transportation"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.2ms)[0m  [1m[32mINSERT INTO "categories" ("created_at", "updated_at", "name") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2020-10-16 17:35:36.509151"], ["updated_at", "2020-10-16 17:35:36.509151"], ["name", "Miscellaneous"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER($1) LIMIT $2[0m  [["username", "isa"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "username", "first_name", "last_name", "address") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["created_at", "2020-10-16 17:35:36.526708"], ["updated_at", "2020-10-16 17:35:36.526708"], ["username", "isa"], ["first_name", "Isa"], ["last_name", "Akhmedov"], ["address", "7205 17th Avenue, Brooklyn, NY"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mAccount Create (0.3ms)[0m  [1m[32mINSERT INTO "accounts" ("created_at", "updated_at", "user_id") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2020-10-16 17:35:36.538226"], ["updated_at", "2020-10-16 17:35:36.538226"], ["user_id", "1"]]
+  [1m[35m (16.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAccount Load (0.2ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mBank Create (0.6ms)[0m  [1m[32mINSERT INTO "banks" ("created_at", "updated_at", "name", "account_id") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["created_at", "2020-10-16 17:35:36.568721"], ["updated_at", "2020-10-16 17:35:36.568721"], ["name", "Chase"], ["account_id", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransactionType Load (0.2ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTransaction Create (0.7ms)[0m  [1m[32mINSERT INTO "transactions" ("created_at", "updated_at", "name", "amount", "t_date", "category_id", "transaction_type_id", "user_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["created_at", "2020-10-16 17:35:36.586310"], ["updated_at", "2020-10-16 17:35:36.586310"], ["name", "Car Payment"], ["amount", 500.0], ["t_date", "2020-10-16 17:35:36.572486"], ["category_id", 5], ["transaction_type_id", 2], ["user_id", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (16.8ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransactionType Load (0.4ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTransaction Create (0.5ms)[0m  [1m[32mINSERT INTO "transactions" ("created_at", "updated_at", "name", "amount", "t_date", "category_id", "transaction_type_id", "user_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["created_at", "2020-10-16 17:35:36.612317"], ["updated_at", "2020-10-16 17:35:36.612317"], ["name", "Rent"], ["amount", 1500.0], ["t_date", "2020-10-16 17:35:36.588813"], ["category_id", 5], ["transaction_type_id", 2], ["user_id", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransactionType Load (0.1ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTransaction Create (0.3ms)[0m  [1m[32mINSERT INTO "transactions" ("created_at", "updated_at", "name", "amount", "t_date", "category_id", "transaction_type_id", "user_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["created_at", "2020-10-16 17:35:36.620073"], ["updated_at", "2020-10-16 17:35:36.620073"], ["name", "Shopping"], ["amount", 100.0], ["t_date", "2020-10-16 17:35:36.614971"], ["category_id", 6], ["transaction_type_id", 2], ["user_id", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransactionType Load (0.2ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTransaction Create (0.2ms)[0m  [1m[32mINSERT INTO "transactions" ("created_at", "updated_at", "name", "amount", "t_date", "category_id", "transaction_type_id", "user_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["created_at", "2020-10-16 17:35:36.637025"], ["updated_at", "2020-10-16 17:35:36.637025"], ["name", "Movies"], ["amount", 100.0], ["t_date", "2020-10-16 17:35:36.622963"], ["category_id", 7], ["transaction_type_id", 2], ["user_id", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (16.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransactionType Load (0.3ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTransaction Create (0.3ms)[0m  [1m[32mINSERT INTO "transactions" ("created_at", "updated_at", "name", "amount", "t_date", "category_id", "transaction_type_id", "user_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["created_at", "2020-10-16 17:35:36.662500"], ["updated_at", "2020-10-16 17:35:36.662500"], ["name", "Restaurant"], ["amount", 100.0], ["t_date", "2020-10-16 17:35:36.638886"], ["category_id", 8], ["transaction_type_id", 2], ["user_id", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransactionType Load (0.2ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 9], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTransaction Create (0.3ms)[0m  [1m[32mINSERT INTO "transactions" ("created_at", "updated_at", "name", "amount", "t_date", "category_id", "transaction_type_id", "user_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["created_at", "2020-10-16 17:35:36.670225"], ["updated_at", "2020-10-16 17:35:36.670225"], ["name", "Train"], ["amount", 100.0], ["t_date", "2020-10-16 17:35:36.665298"], ["category_id", 9], ["transaction_type_id", 2], ["user_id", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransactionType Load (0.1ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 10], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTransaction Create (0.2ms)[0m  [1m[32mINSERT INTO "transactions" ("created_at", "updated_at", "name", "amount", "t_date", "category_id", "transaction_type_id", "user_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["created_at", "2020-10-16 17:35:36.678539"], ["updated_at", "2020-10-16 17:35:36.678539"], ["name", "Gift"], ["amount", 100.0], ["t_date", "2020-10-16 17:35:36.672925"], ["category_id", 10], ["transaction_type_id", 2], ["user_id", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransactionType Load (0.2ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTransaction Create (0.2ms)[0m  [1m[32mINSERT INTO "transactions" ("created_at", "updated_at", "name", "amount", "t_date", "category_id", "transaction_type_id", "user_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["created_at", "2020-10-16 17:35:36.684883"], ["updated_at", "2020-10-16 17:35:36.684883"], ["name", "Salary"], ["amount", 100000.0], ["t_date", "2020-10-16 17:35:36.680540"], ["category_id", 1], ["transaction_type_id", 1], ["user_id", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransactionType Load (0.2ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mUser Load (16.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTransaction Create (0.4ms)[0m  [1m[32mINSERT INTO "transactions" ("created_at", "updated_at", "name", "amount", "t_date", "category_id", "transaction_type_id", "user_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["created_at", "2020-10-16 17:35:36.707676"], ["updated_at", "2020-10-16 17:35:36.707676"], ["name", "Refund"], ["amount", 0.5], ["t_date", "2020-10-16 17:35:36.686621"], ["category_id", 2], ["transaction_type_id", 1], ["user_id", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransactionType Load (0.2ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTransaction Create (0.2ms)[0m  [1m[32mINSERT INTO "transactions" ("created_at", "updated_at", "name", "amount", "t_date", "category_id", "transaction_type_id", "user_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["created_at", "2020-10-16 17:35:36.716240"], ["updated_at", "2020-10-16 17:35:36.716240"], ["name", "Present"], ["amount", 1.0], ["t_date", "2020-10-16 17:35:36.710727"], ["category_id", 3], ["transaction_type_id", 1], ["user_id", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransactionType Load (0.1ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types" WHERE "transaction_types"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTransaction Create (0.3ms)[0m  [1m[32mINSERT INTO "transactions" ("created_at", "updated_at", "name", "amount", "t_date", "category_id", "transaction_type_id", "user_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["created_at", "2020-10-16 17:35:36.722179"], ["updated_at", "2020-10-16 17:35:36.722179"], ["name", "Portfolio"], ["amount", 6.66], ["t_date", "2020-10-16 17:35:36.718272"], ["category_id", 4], ["transaction_type_id", 1], ["user_id", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCategory Load (15.9ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mBudget Create (0.8ms)[0m  [1m[32mINSERT INTO "budgets" ("created_at", "updated_at", "name", "amount", "category_id", "user_id") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["created_at", "2020-10-16 17:35:36.757756"], ["updated_at", "2020-10-16 17:35:36.757756"], ["name", "Car Payment"], ["amount", 500.0], ["category_id", 5], ["user_id", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mBudget Create (0.2ms)[0m  [1m[32mINSERT INTO "budgets" ("created_at", "updated_at", "name", "amount", "category_id", "user_id") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["created_at", "2020-10-16 17:35:36.765134"], ["updated_at", "2020-10-16 17:35:36.765134"], ["name", "Rent"], ["amount", 1500.0], ["category_id", 5], ["user_id", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[36mBudget Create (0.2ms)[0m  [1m[32mINSERT INTO "budgets" ("created_at", "updated_at", "name", "amount", "category_id", "user_id") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["created_at", "2020-10-16 17:35:36.770258"], ["updated_at", "2020-10-16 17:35:36.770258"], ["name", "Shopping"], ["amount", 100.0], ["category_id", 6], ["user_id", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[36mBudget Create (0.2ms)[0m  [1m[32mINSERT INTO "budgets" ("created_at", "updated_at", "name", "amount", "category_id", "user_id") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["created_at", "2020-10-16 17:35:36.774845"], ["updated_at", "2020-10-16 17:35:36.774845"], ["name", "Movies"], ["amount", 100.0], ["category_id", 7], ["user_id", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+  [1m[36mBudget Create (0.2ms)[0m  [1m[32mINSERT INTO "budgets" ("created_at", "updated_at", "name", "amount", "category_id", "user_id") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["created_at", "2020-10-16 17:35:36.779269"], ["updated_at", "2020-10-16 17:35:36.779269"], ["name", "Restaurant"], ["amount", 100.0], ["category_id", 8], ["user_id", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 9], ["LIMIT", 1]]
+  [1m[36mBudget Create (0.2ms)[0m  [1m[32mINSERT INTO "budgets" ("created_at", "updated_at", "name", "amount", "category_id", "user_id") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["created_at", "2020-10-16 17:35:36.783603"], ["updated_at", "2020-10-16 17:35:36.783603"], ["name", "Train"], ["amount", 100.0], ["category_id", 9], ["user_id", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 10], ["LIMIT", 1]]
+  [1m[36mBudget Create (0.2ms)[0m  [1m[32mINSERT INTO "budgets" ("created_at", "updated_at", "name", "amount", "category_id", "user_id") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["created_at", "2020-10-16 17:35:36.787890"], ["updated_at", "2020-10-16 17:35:36.787890"], ["name", "Gift"], ["amount", 100.0], ["category_id", 10], ["user_id", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (16.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mBudget Create (0.3ms)[0m  [1m[32mINSERT INTO "budgets" ("created_at", "updated_at", "name", "amount", "category_id", "user_id") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["created_at", "2020-10-16 17:35:36.810882"], ["updated_at", "2020-10-16 17:35:36.810882"], ["name", "Salary"], ["amount", 100000.0], ["category_id", 1], ["user_id", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mBudget Create (0.3ms)[0m  [1m[32mINSERT INTO "budgets" ("created_at", "updated_at", "name", "amount", "category_id", "user_id") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["created_at", "2020-10-16 17:35:36.816640"], ["updated_at", "2020-10-16 17:35:36.816640"], ["name", "Refund"], ["amount", 0.5], ["category_id", 2], ["user_id", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mBudget Create (0.2ms)[0m  [1m[32mINSERT INTO "budgets" ("created_at", "updated_at", "name", "amount", "category_id", "user_id") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["created_at", "2020-10-16 17:35:36.823117"], ["updated_at", "2020-10-16 17:35:36.823117"], ["name", "Present"], ["amount", 1.0], ["category_id", 3], ["user_id", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mBudget Create (0.2ms)[0m  [1m[32mINSERT INTO "budgets" ("created_at", "updated_at", "name", "amount", "category_id", "user_id") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["created_at", "2020-10-16 17:35:36.833962"], ["updated_at", "2020-10-16 17:35:36.833962"], ["name", "Portfolio"], ["amount", 6.66], ["category_id", 4], ["user_id", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mBudget Load (0.5ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" LIMIT $1[0m  [["LIMIT", 11]]
+Started GET "/" for ::1 at 2020-10-16 13:36:06 -0400
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/islommashanlo/.rvm/gems/ruby-2.6.1/gems/railties-6.0.3.4/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/islommashanlo/.rvm/gems/ruby-2.6.1/gems/railties-6.0.3.4/lib/rails/templates/rails/welcome/index.html.erb (Duration: 6.4ms | Allocations: 482)
+Completed 200 OK in 16ms (Views: 11.4ms | ActiveRecord: 0.0ms | Allocations: 2632)
+
+
+Started GET "/users" for ::1 at 2020-10-16 13:36:09 -0400
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (16.7ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:6:in `index'
+Completed 200 OK in 36ms (Views: 9.8ms | ActiveRecord: 21.3ms | Allocations: 8367)
+
+
+Started GET "/users" for ::1 at 2020-10-16 13:40:56 -0400
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:6:in `index'
+Completed 200 OK in 2ms (Views: 1.3ms | ActiveRecord: 0.2ms | Allocations: 984)
+
+
+Started GET "/favicon.ico" for ::1 at 2020-10-16 13:40:56 -0400
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+actionpack (6.0.3.4) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+actionpack (6.0.3.4) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.3.4) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.3.4) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.3.4) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.3.4) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.3.4) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.3.4) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.3.4) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.3.4) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.3.4) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.3.4) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3.4) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.3.4) lib/action_dispatch/middleware/host_authorization.rb:82:in `call'
+railties (6.0.3.4) lib/rails/engine.rb:527:in `call'
+puma (4.3.6) lib/puma/configuration.rb:228:in `call'
+puma (4.3.6) lib/puma/server.rb:713:in `handle_request'
+puma (4.3.6) lib/puma/server.rb:472:in `process_client'
+puma (4.3.6) lib/puma/server.rb:328:in `block in run'
+puma (4.3.6) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started GET "/users" for ::1 at 2020-10-16 13:41:12 -0400
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (15.6ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:6:in `index'
+Completed 200 OK in 47ms (Views: 8.1ms | ActiveRecord: 20.2ms | Allocations: 8355)
+
+
+Started GET "/users" for ::1 at 2020-10-16 13:42:23 -0400
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:6:in `index'
+Completed 200 OK in 2ms (Views: 1.2ms | ActiveRecord: 0.2ms | Allocations: 984)
+
+
+Started GET "/users" for ::1 at 2020-10-16 13:42:35 -0400
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:6:in `index'
+Completed 200 OK in 11ms (Views: 6.1ms | ActiveRecord: 2.3ms | Allocations: 7471)
+
+
+Started GET "/users" for ::1 at 2020-10-16 13:44:43 -0400
+  [1m[35m (3.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:6:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (0.47ms)
+Completed 200 OK in 22ms (Views: 15.8ms | ActiveRecord: 3.6ms | Allocations: 11030)
+
+
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mTransaction Load (0.3ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 11]]
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mTransaction Load (0.3ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."user_id" = $1[0m  [["user_id", 1]]
+  [1m[36mUser Load (11.8ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."user_id" = $1[0m  [["user_id", 1]]
+  [1m[36mUser Load (4.7ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."user_id" = $1[0m  [["user_id", 1]]
+  [1m[36mUser Load (3.7ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."user_id" = $1[0m  [["user_id", 1]]
+Started GET "/users" for ::1 at 2020-10-16 13:49:41 -0400
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:6:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (1.57ms)
+Completed 500 Internal Server Error in 13ms (ActiveRecord: 2.6ms | Allocations: 8717)
+
+
+  
+NoMethodError (undefined method `transactions' for #<UserSerializer:0x00007ff1d4325370>):
+  
+app/serializers/user_serializer.rb:5:in `account_balance'
+app/controllers/users_controller.rb:6:in `index'
+Started GET "/users" for ::1 at 2020-10-16 13:50:46 -0400
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:6:in `index'
+[active_model_serializers]   [1m[36mTransaction Load (0.3ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."user_id" = $1[0m  [["user_id", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:5:in `account_balance'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (14.96ms)
+Completed 200 OK in 45ms (Views: 20.1ms | ActiveRecord: 21.9ms | Allocations: 18817)
+
+
+Started GET "/users" for ::1 at 2020-10-16 13:53:56 -0400
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (11.9ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:6:in `index'
+[active_model_serializers]   [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."user_id" = $1[0m  [["user_id", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:5:in `account_balance'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (19.36ms)
+Completed 200 OK in 43ms (Views: 24.1ms | ActiveRecord: 16.6ms | Allocations: 15969)
+
+
+Started GET "/users" for ::1 at 2020-10-16 13:54:03 -0400
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:6:in `index'
+[active_model_serializers]   [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."user_id" = $1[0m  [["user_id", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:5:in `account_balance'
+[active_model_serializers]   [1m[36mAccount Load (0.4ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."user_id" = $1[0m  [["user_id", "1"]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:9:in `map'
+[active_model_serializers]   [1m[36mBank Load (0.2ms)[0m  [1m[34mSELECT "banks".* FROM "banks" WHERE "banks"."account_id" = $1[0m  [["account_id", 1]]
+[active_model_serializers]   ↳ app/controllers/users_controller.rb:6:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (43.94ms)
+Completed 200 OK in 58ms (Views: 32.4ms | ActiveRecord: 22.8ms | Allocations: 25657)
+
+
+Started GET "/users" for ::1 at 2020-10-16 13:54:20 -0400
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:6:in `index'
+[active_model_serializers]   [1m[36mTransaction Load (0.3ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."user_id" = $1[0m  [["user_id", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:5:in `account_balance'
+[active_model_serializers]   [1m[36mAccount Load (0.2ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."user_id" = $1[0m  [["user_id", "1"]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:9:in `map'
+[active_model_serializers]   [1m[36mBank Load (0.1ms)[0m  [1m[34mSELECT "banks".* FROM "banks" WHERE "banks"."account_id" = $1[0m  [["account_id", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:9:in `flatten'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (51.48ms)
+Completed 200 OK in 63ms (Views: 32.9ms | ActiveRecord: 27.8ms | Allocations: 25166)
+
+
+Started GET "/users" for ::1 at 2020-10-16 13:55:13 -0400
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:6:in `index'
+[active_model_serializers]   [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."user_id" = $1[0m  [["user_id", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:5:in `account_balance'
+[active_model_serializers]   [1m[36mAccount Load (0.2ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."user_id" = $1[0m  [["user_id", "1"]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:9:in `map'
+[active_model_serializers]   [1m[36mBank Load (0.2ms)[0m  [1m[34mSELECT "banks".* FROM "banks" WHERE "banks"."account_id" = $1[0m  [["account_id", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:9:in `flatten'
+[active_model_serializers]   [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCACHE Category Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 9], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 10], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (61.99ms)
+Completed 200 OK in 75ms (Views: 44.4ms | ActiveRecord: 27.7ms | Allocations: 38509)
+
+
+Started GET "/users" for ::1 at 2020-10-16 13:55:53 -0400
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:6:in `index'
+[active_model_serializers]   [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."user_id" = $1[0m  [["user_id", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:5:in `account_balance'
+[active_model_serializers]   [1m[36mAccount Load (0.2ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."user_id" = $1[0m  [["user_id", "1"]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:9:in `map'
+[active_model_serializers]   [1m[36mBank Load (0.2ms)[0m  [1m[34mSELECT "banks".* FROM "banks" WHERE "banks"."account_id" = $1[0m  [["account_id", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:9:in `flatten'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCACHE Category Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 9], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 10], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (63.12ms)
+Completed 200 OK in 75ms (Views: 43.5ms | ActiveRecord: 29.0ms | Allocations: 39971)
+
+
+Started GET "/users" for ::1 at 2020-10-16 13:56:21 -0400
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:6:in `index'
+[active_model_serializers]   [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."user_id" = $1[0m  [["user_id", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:5:in `account_balance'
+[active_model_serializers]   [1m[36mAccount Load (16.4ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."user_id" = $1[0m  [["user_id", "1"]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:9:in `map'
+[active_model_serializers]   [1m[36mBank Load (0.2ms)[0m  [1m[34mSELECT "banks".* FROM "banks" WHERE "banks"."account_id" = $1[0m  [["account_id", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:9:in `flatten'
+[active_model_serializers]   [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCACHE Category Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 9], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 10], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (51.81ms)
+Completed 200 OK in 54ms (Views: 34.8ms | ActiveRecord: 18.6ms | Allocations: 14726)
+
+
+Started GET "/users" for ::1 at 2020-10-16 13:56:22 -0400
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:6:in `index'
+[active_model_serializers]   [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."user_id" = $1[0m  [["user_id", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:5:in `account_balance'
+[active_model_serializers]   [1m[36mAccount Load (0.2ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."user_id" = $1[0m  [["user_id", "1"]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:9:in `map'
+[active_model_serializers]   [1m[36mBank Load (0.2ms)[0m  [1m[34mSELECT "banks".* FROM "banks" WHERE "banks"."account_id" = $1[0m  [["account_id", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:9:in `flatten'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCACHE Category Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 9], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 10], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (30.16ms)
+Completed 200 OK in 32ms (Views: 29.6ms | ActiveRecord: 2.0ms | Allocations: 14724)
+
+
+Started GET "/users" for ::1 at 2020-10-16 13:56:23 -0400
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:6:in `index'
+[active_model_serializers]   [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."user_id" = $1[0m  [["user_id", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:5:in `account_balance'
+[active_model_serializers]   [1m[36mAccount Load (0.2ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."user_id" = $1[0m  [["user_id", "1"]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:9:in `map'
+[active_model_serializers]   [1m[36mBank Load (0.1ms)[0m  [1m[34mSELECT "banks".* FROM "banks" WHERE "banks"."account_id" = $1[0m  [["account_id", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:9:in `flatten'
+[active_model_serializers]   [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCACHE Category Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 9], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (16.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 10], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (52.38ms)
+Completed 200 OK in 54ms (Views: 35.3ms | ActiveRecord: 18.7ms | Allocations: 14724)
+
+
+Started GET "/users" for ::1 at 2020-10-16 13:56:23 -0400
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:6:in `index'
+[active_model_serializers]   [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."user_id" = $1[0m  [["user_id", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:5:in `account_balance'
+[active_model_serializers]   [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."user_id" = $1[0m  [["user_id", "1"]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:9:in `map'
+[active_model_serializers]   [1m[36mBank Load (0.2ms)[0m  [1m[34mSELECT "banks".* FROM "banks" WHERE "banks"."account_id" = $1[0m  [["account_id", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:9:in `flatten'
+[active_model_serializers]   [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCACHE Category Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 9], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 10], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (17.59ms)
+Completed 200 OK in 19ms (Views: 17.2ms | ActiveRecord: 1.9ms | Allocations: 14724)
+
+
+Started GET "/users" for ::1 at 2020-10-16 13:58:20 -0400
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:6:in `index'
+[active_model_serializers]   [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."user_id" = $1[0m  [["user_id", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:5:in `account_balance'
+[active_model_serializers]   [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."user_id" = $1[0m  [["user_id", "1"]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:9:in `map'
+[active_model_serializers]   [1m[36mBank Load (0.1ms)[0m  [1m[34mSELECT "banks".* FROM "banks" WHERE "banks"."account_id" = $1[0m  [["account_id", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:9:in `flatten'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCACHE Category Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 9], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 10], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (16.25ms)
+Completed 200 OK in 18ms (Views: 16.1ms | ActiveRecord: 1.7ms | Allocations: 14724)
+
+
+Started GET "/users/1" for ::1 at 2020-10-16 13:59:50 -0400
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Class (0.12ms)
+Completed 200 OK in 3ms (Views: 2.9ms | ActiveRecord: 0.0ms | Allocations: 719)
+
+
+Started GET "/users/1" for ::1 at 2020-10-16 14:00:35 -0400
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:23:in `find_user'
+[active_model_serializers]   [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."user_id" = $1[0m  [["user_id", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:5:in `account_balance'
+[active_model_serializers]   [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."user_id" = $1[0m  [["user_id", "1"]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:9:in `map'
+[active_model_serializers]   [1m[36mBank Load (0.1ms)[0m  [1m[34mSELECT "banks".* FROM "banks" WHERE "banks"."account_id" = $1[0m  [["account_id", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:9:in `flatten'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCACHE Category Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 9], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 10], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers]   [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:13:in `block in categories'
+[active_model_serializers] Rendered UserSerializer with ActiveModelSerializers::Adapter::Attributes (46.81ms)
+Completed 200 OK in 62ms (Views: 40.0ms | ActiveRecord: 11.8ms | Allocations: 39800)
+
+

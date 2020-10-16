@@ -4,6 +4,7 @@ class CreateBudgets < ActiveRecord::Migration[6.0]
 
       t.timestamps
       t.string :name
+      t.float :amount
       t.integer :category_id
       t.integer :user_id
     end

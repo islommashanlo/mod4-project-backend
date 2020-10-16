@@ -4,10 +4,11 @@ class CreateTransactions < ActiveRecord::Migration[6.0]
 
       t.timestamps
       t.string :name
-      t.string :amount
+      t.float :amount
       t.datetime :t_date
       t.integer :category_id
       t.integer :transaction_type_id
+      t.integer :user_id
     end
   end
 end
