@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :accounts
   resources :banks
   resources :budgets
+  resources :transaction_types
   resources :transactions
   resources :categories
   resources :users

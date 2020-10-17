@@ -6,25 +6,25 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+isa = User.create(username: "isa", first_name: "Isa", last_name: "Akhmedov", address: "7205 17th Avenue, Brooklyn, NY")
 
 # Transaction Type
 credit = TransactionType.create(name: "Credit")
 debit = TransactionType.create(name: "Debit")
 # Credit Type Categories 
-income = Category.create(name:"Income")
-refund = Category.create(name:"Refunds")
-gift = Category.create(name:"Gifts")
-misc_inc = Category.create(name:"Miscellaneous")
+income = Category.create(name:"Income", user_id: isa.id)
+refund = Category.create(name:"Refunds", user_id: isa.id)
+gift = Category.create(name:"Gifts", user_id: isa.id)
+misc_inc = Category.create(name:"Miscellaneous", user_id: isa.id)
 # Debit Type Category
-bills = Category.create(name:"Bills")
-shop = Category.create(name:"Groceries")
-ent = Category.create(name:"Entertainment")
-din = Category.create(name:"Dining Out")
-transp = Category.create(name:"Transportation")
-misc = Category.create(name:"Miscellaneous")
+bills = Category.create(name:"Bills", user_id: isa.id)
+shop = Category.create(name:"Groceries", user_id: isa.id)
+ent = Category.create(name:"Entertainment", user_id: isa.id)
+din = Category.create(name:"Dining Out", user_id: isa.id)
+transp = Category.create(name:"Transportation", user_id: isa.id)
+misc = Category.create(name:"Miscellaneous", user_id: isa.id)
 
 # User
-isa = User.create(username: "isa", first_name: "Isa", last_name: "Akhmedov", address: "7205 17th Avenue, Brooklyn, NY")
 isa_acc = Account.create(user_id: isa.id)
 isa_bank = Bank.create(name: "Chase", account_id: isa_acc.id)
 
