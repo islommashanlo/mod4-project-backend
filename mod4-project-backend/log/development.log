@@ -25631,3 +25631,168 @@ Processing by UsersController#show as */*
 Completed 200 OK in 11ms (Views: 6.4ms | ActiveRecord: 2.9ms | Allocations: 3644)
 
 
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1 OFFSET $2[0m  [["LIMIT", 1], ["OFFSET", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER($1) AND "users"."id" != $2 LIMIT $3[0m  [["username", "royFloresNyc"], ["id", 2], ["LIMIT", 1]]
+  [1m[36mUser Update (1.1ms)[0m  [1m[33mUPDATE "users" SET "updated_at" = $1, "first_name" = $2 WHERE "users"."id" = $3[0m  [["updated_at", "2020-10-17 23:41:01.894824"], ["first_name", "Ardie"], ["id", 2]]
+  [1m[35m (1.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER($1) AND "users"."id" != $2 LIMIT $3[0m  [["username", "royFloresNyc"], ["id", 2], ["LIMIT", 1]]
+  [1m[36mUser Update (0.5ms)[0m  [1m[33mUPDATE "users" SET "updated_at" = $1, "first_name" = $2 WHERE "users"."id" = $3[0m  [["updated_at", "2020-10-17 23:42:08.872377"], ["first_name", "Roy"], ["id", 2]]
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+Started PATCH "/users/2" for ::1 at 2020-10-17 19:47:21 -0400
+Processing by UsersController#update as */*
+  Parameters: {"username"=>"royFloresNyc", "first_name"=>"Roy", "last_name"=>"Flores", "address"=>"2019 Broadway, New York, NY 10025", "id"=>"2", "user"=>{"id"=>"2", "username"=>"royFloresNyc", "first_name"=>"Roy", "last_name"=>"Flores", "address"=>"2019 Broadway, New York, NY 10025"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:27:in `find_user'
+[31mUnpermitted parameter: :id[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:20:in `update'
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER($1) AND "users"."id" != $2 LIMIT $3[0m  [["username", "royFloresNyc"], ["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:20:in `update'
+  [1m[36mUser Update (0.3ms)[0m  [1m[33mUPDATE "users" SET "address" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["address", "2019 Broadway, New York, NY 10025"], ["updated_at", "2020-10-17 23:47:21.789477"], ["id", 2]]
+  ↳ app/controllers/users_controller.rb:20:in `update'
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users_controller.rb:20:in `update'
+[active_model_serializers]   [1m[36mTransaction Load (0.3ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."user_id" = $1[0m  [["user_id", 2]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:5:in `account_balance'
+[active_model_serializers]   [1m[36mAccount Load (0.3ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."user_id" = $1[0m  [["user_id", "2"]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:9:in `map'
+[active_model_serializers]   [1m[36mTransactionType Load (0.5ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types"[0m
+[active_model_serializers]   ↳ app/controllers/users_controller.rb:21:in `update'
+[active_model_serializers] Rendered UserSerializer with ActiveModelSerializers::Adapter::Attributes (14.12ms)
+Completed 200 OK in 28ms (Views: 14.5ms | ActiveRecord: 4.3ms | Allocations: 18076)
+
+
+Started GET "/users/2" for ::1 at 2020-10-17 19:48:56 -0400
+Processing by UsersController#show as */*
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:27:in `find_user'
+[active_model_serializers]   [1m[36mTransaction Load (0.4ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."user_id" = $1[0m  [["user_id", 2]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:5:in `account_balance'
+[active_model_serializers]   [1m[36mAccount Load (0.6ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."user_id" = $1[0m  [["user_id", "2"]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:9:in `map'
+[active_model_serializers]   [1m[36mTransactionType Load (0.4ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types"[0m
+[active_model_serializers]   ↳ app/controllers/users_controller.rb:6:in `show'
+[active_model_serializers] Rendered UserSerializer with ActiveModelSerializers::Adapter::Attributes (8.37ms)
+Completed 200 OK in 11ms (Views: 7.6ms | ActiveRecord: 1.7ms | Allocations: 3653)
+
+
+Started GET "/users/2" for ::1 at 2020-10-17 19:49:05 -0400
+Processing by UsersController#show as */*
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:27:in `find_user'
+[active_model_serializers]   [1m[36mTransaction Load (0.3ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."user_id" = $1[0m  [["user_id", 2]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:5:in `account_balance'
+[active_model_serializers]   [1m[36mAccount Load (0.3ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."user_id" = $1[0m  [["user_id", "2"]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:9:in `map'
+[active_model_serializers]   [1m[36mTransactionType Load (0.4ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types"[0m
+[active_model_serializers]   ↳ app/controllers/users_controller.rb:6:in `show'
+[active_model_serializers] Rendered UserSerializer with ActiveModelSerializers::Adapter::Attributes (6.68ms)
+Completed 200 OK in 9ms (Views: 6.2ms | ActiveRecord: 1.4ms | Allocations: 3653)
+
+
+Started GET "/users/2" for ::1 at 2020-10-17 19:49:12 -0400
+Processing by UsersController#show as */*
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (14.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:27:in `find_user'
+[active_model_serializers]   [1m[36mTransaction Load (0.3ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."user_id" = $1[0m  [["user_id", 2]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:5:in `account_balance'
+[active_model_serializers]   [1m[36mAccount Load (1.4ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."user_id" = $1[0m  [["user_id", "2"]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:9:in `map'
+[active_model_serializers]   [1m[36mTransactionType Load (1.1ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types"[0m
+[active_model_serializers]   ↳ app/controllers/users_controller.rb:6:in `show'
+[active_model_serializers] Rendered UserSerializer with ActiveModelSerializers::Adapter::Attributes (9.62ms)
+Completed 200 OK in 27ms (Views: 7.4ms | ActiveRecord: 17.3ms | Allocations: 3653)
+
+
+Started GET "/users/2" for ::1 at 2020-10-17 19:49:38 -0400
+Processing by UsersController#show as */*
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:27:in `find_user'
+[active_model_serializers]   [1m[36mTransaction Load (0.4ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."user_id" = $1[0m  [["user_id", 2]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:5:in `account_balance'
+[active_model_serializers]   [1m[36mAccount Load (2.0ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."user_id" = $1[0m  [["user_id", "2"]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:9:in `map'
+[active_model_serializers]   [1m[36mTransactionType Load (0.4ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types"[0m
+[active_model_serializers]   ↳ app/controllers/users_controller.rb:6:in `show'
+[active_model_serializers] Rendered UserSerializer with ActiveModelSerializers::Adapter::Attributes (30.4ms)
+Completed 200 OK in 33ms (Views: 28.5ms | ActiveRecord: 3.1ms | Allocations: 3656)
+
+
+Started PATCH "/users/2" for ::1 at 2020-10-17 19:49:48 -0400
+Processing by UsersController#update as */*
+  Parameters: {"username"=>"royFloresNyc", "first_name"=>"Roy", "last_name"=>"Flores", "address"=>"2020 Broadway, New York, NY 10025", "id"=>"2", "user"=>{"id"=>"2", "username"=>"royFloresNyc", "first_name"=>"Roy", "last_name"=>"Flores", "address"=>"2020 Broadway, New York, NY 10025"}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:27:in `find_user'
+[31mUnpermitted parameter: :id[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:20:in `update'
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER($1) AND "users"."id" != $2 LIMIT $3[0m  [["username", "royFloresNyc"], ["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:20:in `update'
+  [1m[36mUser Update (0.4ms)[0m  [1m[33mUPDATE "users" SET "address" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["address", "2020 Broadway, New York, NY 10025"], ["updated_at", "2020-10-17 23:49:48.799871"], ["id", 2]]
+  ↳ app/controllers/users_controller.rb:20:in `update'
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users_controller.rb:20:in `update'
+[active_model_serializers]   [1m[36mTransaction Load (0.4ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."user_id" = $1[0m  [["user_id", 2]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:5:in `account_balance'
+[active_model_serializers]   [1m[36mAccount Load (0.3ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."user_id" = $1[0m  [["user_id", "2"]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:9:in `map'
+[active_model_serializers]   [1m[36mTransactionType Load (0.3ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types"[0m
+[active_model_serializers]   ↳ app/controllers/users_controller.rb:21:in `update'
+[active_model_serializers] Rendered UserSerializer with ActiveModelSerializers::Adapter::Attributes (6.47ms)
+Completed 200 OK in 18ms (Views: 6.2ms | ActiveRecord: 3.2ms | Allocations: 7424)
+
+
+Started PATCH "/users/2" for ::1 at 2020-10-17 19:50:18 -0400
+Processing by UsersController#update as */*
+  Parameters: {"username"=>"royFloresNyc", "first_name"=>"Ardie", "last_name"=>"Flores", "address"=>"2020 Broadway, New York, NY 10025", "id"=>"2", "user"=>{"id"=>"2", "username"=>"royFloresNyc", "first_name"=>"Ardie", "last_name"=>"Flores", "address"=>"2020 Broadway, New York, NY 10025"}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:27:in `find_user'
+[31mUnpermitted parameter: :id[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:20:in `update'
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER($1) AND "users"."id" != $2 LIMIT $3[0m  [["username", "royFloresNyc"], ["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:20:in `update'
+  [1m[36mUser Update (0.5ms)[0m  [1m[33mUPDATE "users" SET "first_name" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["first_name", "Ardie"], ["updated_at", "2020-10-17 23:50:18.239000"], ["id", 2]]
+  ↳ app/controllers/users_controller.rb:20:in `update'
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users_controller.rb:20:in `update'
+[active_model_serializers]   [1m[36mTransaction Load (0.3ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."user_id" = $1[0m  [["user_id", 2]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:5:in `account_balance'
+[active_model_serializers]   [1m[36mAccount Load (0.2ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."user_id" = $1[0m  [["user_id", "2"]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:9:in `map'
+[active_model_serializers]   [1m[36mTransactionType Load (0.2ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types"[0m
+[active_model_serializers]   ↳ app/controllers/users_controller.rb:21:in `update'
+[active_model_serializers] Rendered UserSerializer with ActiveModelSerializers::Adapter::Attributes (4.13ms)
+Completed 200 OK in 15ms (Views: 4.0ms | ActiveRecord: 2.8ms | Allocations: 7424)
+
+
+Started PATCH "/users/2" for ::1 at 2020-10-17 19:50:44 -0400
+Processing by UsersController#update as */*
+  Parameters: {"username"=>"royFloresNyc", "first_name"=>"Roy", "last_name"=>"Flores", "address"=>"2020 Broadway, New York, NY 10025", "id"=>"2", "user"=>{"id"=>"2", "username"=>"royFloresNyc", "first_name"=>"Roy", "last_name"=>"Flores", "address"=>"2020 Broadway, New York, NY 10025"}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:27:in `find_user'
+[31mUnpermitted parameter: :id[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:20:in `update'
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER($1) AND "users"."id" != $2 LIMIT $3[0m  [["username", "royFloresNyc"], ["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:20:in `update'
+  [1m[36mUser Update (0.5ms)[0m  [1m[33mUPDATE "users" SET "first_name" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["first_name", "Roy"], ["updated_at", "2020-10-17 23:50:44.646666"], ["id", 2]]
+  ↳ app/controllers/users_controller.rb:20:in `update'
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users_controller.rb:20:in `update'
+[active_model_serializers]   [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."user_id" = $1[0m  [["user_id", 2]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:5:in `account_balance'
+[active_model_serializers]   [1m[36mAccount Load (0.2ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."user_id" = $1[0m  [["user_id", "2"]]
+[active_model_serializers]   ↳ app/serializers/user_serializer.rb:9:in `map'
+[active_model_serializers]   [1m[36mTransactionType Load (0.2ms)[0m  [1m[34mSELECT "transaction_types".* FROM "transaction_types"[0m
+[active_model_serializers]   ↳ app/controllers/users_controller.rb:21:in `update'
+[active_model_serializers] Rendered UserSerializer with ActiveModelSerializers::Adapter::Attributes (4.09ms)
+Completed 200 OK in 14ms (Views: 4.0ms | ActiveRecord: 2.6ms | Allocations: 7423)
+
+
