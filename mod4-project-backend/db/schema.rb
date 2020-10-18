@@ -49,7 +49,6 @@ ActiveRecord::Schema.define(version: 2020_10_17_175616) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "name"
-    t.integer "user_id"
   end
 
   create_table "transaction_types", force: :cascade do |t|
@@ -63,7 +62,7 @@ ActiveRecord::Schema.define(version: 2020_10_17_175616) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "name"
     t.float "amount"
-    t.string "t_date"
+    t.datetime "t_date"
     t.integer "category_id"
     t.integer "transaction_type_id"
     t.integer "user_id"
