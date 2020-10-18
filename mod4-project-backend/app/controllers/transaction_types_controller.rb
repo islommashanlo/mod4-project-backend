@@ -6,6 +6,7 @@ class TransactionTypesController < ApplicationController
         render json: t_types
     end
 
+
     def show
         @transaction_type
     end

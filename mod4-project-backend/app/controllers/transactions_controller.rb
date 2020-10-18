@@ -1,5 +1,10 @@
 class TransactionsController < ApplicationController
-    before_action :find_transaction, only: [:show, :update, :edit, :delete]
+    before_action :find_transaction, only: [:new, :create, :show, :update, :edit, :delete]
+
+    def index
+        transacts = Transaction.all
+        render json: transacts
+    end
 
     def create
         transact = Transaction.create(transact_params)
@@ -18,6 +23,6 @@ class TransactionsController < ApplicationController
     end
 
     def transact_params
-        params.require(:transaction).permit(:name, :amount, :t_date, :user_id, :category_id, :transaction_type_id)
+        params.require(:transaction).permit(:name, :amount.to_f, :t_date, :user_id.to_i, :category_id.to_i, :transaction_type_id.to_i)
     end
 end
