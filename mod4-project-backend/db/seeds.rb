@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-isa = User.create(username: "isa", first_name: "Isa", last_name: "Akhmedov", address: "7205 17th Avenue, Brooklyn, NY")
+isa = User.create(username: "isa", first_name: "Isa", last_name: "Akhmedov", address: "7205 17th Avenue, Brooklyn, NY", password: "test", password_confirmation: "test")
 
 # Transaction Type
 credit = TransactionType.create(name: "Credit")
@@ -29,18 +29,23 @@ isa_acc = Account.create(user_id: isa.id)
 isa_bank = Bank.create(name: "Chase", account_id: isa_acc.id)
 
 # Transactions
-transact1 = Transaction.create(name: "Car Payment", amount: 500.00, t_date: Time.now.to_datetime, category_id: bills.id, transaction_type_id: debit.id, user_id: isa.id)
-transact2 = Transaction.create(name: "Rent", amount: 1500.00, t_date: Time.now.to_datetime, category_id: bills.id, transaction_type_id: debit.id, user_id: isa.id)
-transact3 = Transaction.create(name: "Shopping", amount: 100.00, t_date: Time.now.to_datetime, category_id: shop.id, transaction_type_id: debit.id, user_id: isa.id)
-transact4 = Transaction.create(name: "Movies", amount: 100.00, t_date: Time.now.to_datetime, category_id: ent.id, transaction_type_id: debit.id, user_id: isa.id)
-transact5 = Transaction.create(name: "Restaurant", amount: 100.00, t_date: Time.now.to_datetime, category_id: din.id, transaction_type_id: debit.id, user_id: isa.id)
-transact6 = Transaction.create(name: "Train", amount: 100.00, t_date: Time.now.to_datetime, category_id: transp.id, transaction_type_id: debit.id, user_id: isa.id)
-transact7 = Transaction.create(name: "Gift", amount: 100.00, t_date: Time.now.to_datetime, category_id: misc.id, transaction_type_id: debit.id, user_id: isa.id)
+transact1 = Transaction.create(name: "Car Payment", amount: 500.00, t_date: Time.now.to_date, category_id: bills.id, transaction_type_id: debit.id, user_id: isa.id)
+transact2 = Transaction.create(name: "Rent", amount: 1500.00, t_date: Time.now.to_date, category_id: bills.id, transaction_type_id: debit.id, user_id: isa.id)
+transact3 = Transaction.create(name: "Shopping", amount: 100.00, t_date: Time.now.to_date, category_id: shop.id, transaction_type_id: debit.id, user_id: isa.id)
+transact4 = Transaction.create(name: "Movies", amount: 100.00, t_date: Time.now.to_date, category_id: ent.id, transaction_type_id: debit.id, user_id: isa.id)
+transact5 = Transaction.create(name: "Restaurant", amount: 100.00, t_date: Time.now.to_date, category_id: din.id, transaction_type_id: debit.id, user_id: isa.id)
+transact6 = Transaction.create(name: "Train", amount: 100.00, t_date: Time.now.to_date, category_id: transp.id, transaction_type_id: debit.id, user_id: isa.id)
+transact7 = Transaction.create(name: "Gift", amount: 100.00, t_date: Time.now.to_date, category_id: misc.id, transaction_type_id: debit.id, user_id: isa.id)
 
-transact8 = Transaction.create(name: "Salary", amount: 100000.00, t_date: Time.now.to_datetime, category_id: income.id, transaction_type_id: credit.id, user_id: isa.id)
-transact9 = Transaction.create(name: "Refund", amount: 0.50, t_date: Time.now.to_datetime, category_id: refund.id, transaction_type_id: credit.id, user_id: isa.id)
-transact10 = Transaction.create(name: "Present", amount: 1.00, t_date: Time.now.to_datetime, category_id: gift.id, transaction_type_id: credit.id, user_id: isa.id)
-transact11 = Transaction.create(name: "Portfolio", amount: 6.66, t_date: Time.now.to_datetime, category_id: misc_inc.id, transaction_type_id: credit.id, user_id: isa.id)
+transact8 = Transaction.create(name: "Salary", amount: 100000.00, t_date: Time.now.to_date, category_id: income.id, transaction_type_id: credit.id, user_id: isa.id)
+transact9 = Transaction.create(name: "Refund", amount: 0.50, t_date: Time.now.to_date, category_id: refund.id, transaction_type_id: credit.id, user_id: isa.id)
+transact10 = Transaction.create(name: "Present", amount: 1.00, t_date: Time.now.to_date, category_id: gift.id, transaction_type_id: credit.id, user_id: isa.id)
+transact11 = Transaction.create(name: "Portfolio", amount: 6.66, t_date: Time.now.to_date, category_id: misc_inc.id, transaction_type_id: credit.id, user_id: isa.id)
+
+transact12 = Transaction.create(name: "Car Payment", amount: 658.00, t_date: Time.now.to_date+30, category_id: bills.id, transaction_type_id: debit.id, user_id: isa.id)
+transact13 = Transaction.create(name: "Car Payment", amount: 743.00, t_date: Time.now.to_date+60, category_id: bills.id, transaction_type_id: debit.id, user_id: isa.id)
+transact14 = Transaction.create(name: "Car Payment", amount: 898.00, t_date: Time.now.to_date+90, category_id: bills.id, transaction_type_id: debit.id, user_id: isa.id)
+
 # Budget
 Budget.create(name: transact1.name, amount: transact1.amount, category_id: transact1.category_id, user_id: isa.id)
 Budget.create(name: transact2.name, amount: transact2.amount, category_id: transact2.category_id, user_id: isa.id)
@@ -49,10 +54,7 @@ Budget.create(name: transact4.name, amount: transact4.amount, category_id: trans
 Budget.create(name: transact5.name, amount: transact5.amount, category_id: transact5.category_id, user_id: isa.id)
 Budget.create(name: transact6.name, amount: transact6.amount, category_id: transact6.category_id, user_id: isa.id)
 Budget.create(name: transact7.name, amount: transact7.amount, category_id: transact7.category_id, user_id: isa.id)
-Budget.create(name: transact8.name, amount: transact8.amount, category_id: transact8.category_id, user_id: isa.id)
-Budget.create(name: transact9.name, amount: transact9.amount, category_id: transact9.category_id, user_id: isa.id)
-Budget.create(name: transact10.name, amount: transact10.amount, category_id: transact10.category_id, user_id: isa.id)
-Budget.create(name: transact11.name, amount: transact11.amount, category_id: transact11.category_id, user_id: isa.id)
+
 
 
 
