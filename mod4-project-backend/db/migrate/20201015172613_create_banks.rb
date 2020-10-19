@@ -4,7 +4,6 @@ class CreateBanks < ActiveRecord::Migration[6.0]
 
       t.timestamps
       t.string :name
-      t.integer :account_id
     end
   end
 end

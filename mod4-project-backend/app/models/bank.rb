@@ -1,3 +1,3 @@
 class Bank < ApplicationRecord
-    belongs_to :account
+    has_many :accounts
 end

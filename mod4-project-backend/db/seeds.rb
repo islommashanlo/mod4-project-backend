@@ -25,8 +25,8 @@ transp = Category.create(name:"Transportation", user_id: isa.id)
 misc = Category.create(name:"Miscellaneous", user_id: isa.id)
 
 # User
-isa_acc = Account.create(user_id: isa.id)
-isa_bank = Bank.create(name: "Chase", account_id: isa_acc.id)
+isa_bank = Bank.create(name: "Chase")
+isa_acc = Account.create(user_id: isa.id, bank_id: isa_bank.id)
 
 # Transactions
 transact1 = Transaction.create(name: "Car Payment", amount: 500.00, t_date: Time.now.to_date, category_id: bills.id, transaction_type_id: debit.id, user_id: isa.id)
