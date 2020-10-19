@@ -1,4 +1,4 @@
 class Account < ApplicationRecord
-    has_many :banks
+    belongs_to :bank
     belongs_to :user
 end

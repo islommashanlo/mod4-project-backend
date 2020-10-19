@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 2020_10_17_175616) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "user_id"
+    t.string "bank_id"
   end
 
   create_table "address_converters", force: :cascade do |t|
@@ -33,7 +34,6 @@ ActiveRecord::Schema.define(version: 2020_10_17_175616) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "name"
-    t.integer "account_id"
   end
 
   create_table "budgets", force: :cascade do |t|
@@ -75,6 +75,7 @@ ActiveRecord::Schema.define(version: 2020_10_17_175616) do
     t.string "first_name"
     t.string "last_name"
     t.string "address"
+    t.string "password_digest"
   end
 
 end

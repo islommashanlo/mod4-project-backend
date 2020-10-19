@@ -21,6 +21,9 @@ gem "dotenv-rails"
 gem 'net-http'
 gem 'faker'
 gem  'plaid'
+gem 'ruby_linear_regression'
+gem 'jwt'
+gem 'figaro'
 
 
 
