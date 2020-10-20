@@ -6,7 +6,7 @@ class UserSerializer < ActiveModel::Serializer
     end
 
     def banks
-        self.object.accounts.map{|e| e.banks}.flatten
+        Bank.all
     end
 
     def credit_categories
