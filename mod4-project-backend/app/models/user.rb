@@ -51,12 +51,12 @@ class User < ApplicationRecord
         transp = Category.create(name:"Transportation", user_id: self.id, transaction_type_id: 2)
         misc = Category.create(name:"Miscellaneous", user_id: self.id, transaction_type_id: 2)
 
-        Budget.create(name: bills.name, amount: 0, category_id: bills.id, user_id: isa.id)
-        Budget.create(name: shop.name, amount: 0, category_id: shop.id, user_id: isa.id)
-        Budget.create(name: ent.name, amount: 0, category_id: ent.id, user_id: isa.id)
-        Budget.create(name: din.name, amount: 0, category_id: din.id, user_id: isa.id)
-        Budget.create(name: transp.name, amount: 0, category_id: transp.id, user_id: isa.id)
-        Budget.create(name: misc.name, amount: 0, category_id: misc.id, user_id: isa.id)
+        Budget.create(name: bills.name, amount: 0, category_id: bills.id, user_id: self.id)
+        Budget.create(name: shop.name, amount: 0, category_id: shop.id, user_id: self.id)
+        Budget.create(name: ent.name, amount: 0, category_id: ent.id, user_id: self.id)
+        Budget.create(name: din.name, amount: 0, category_id: din.id, user_id: self.id)
+        Budget.create(name: transp.name, amount: 0, category_id: transp.id, user_id: self.id)
+        Budget.create(name: misc.name, amount: 0, category_id: misc.id, user_id: self.id)
     end
 
 

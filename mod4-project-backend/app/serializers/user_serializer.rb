@@ -10,11 +10,11 @@ class UserSerializer < ActiveModel::Serializer
     end
 
     def credit_categories
-        self.object.transactions.select{|e|e.transaction_type.id == 1}.map{|e|e.category}.uniq
+        self.object.categories.select{|e|e.transaction_type.id == 1}
     end
 
     def debit_categories
-        self.object.transactions.select{|e|e.transaction_type.id == 2}.map{|e|e.category}.uniq
+        self.object.categories.select{|e|e.transaction_type.id == 2}
     end
 
     def transactions
