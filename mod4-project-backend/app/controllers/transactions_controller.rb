@@ -28,6 +28,6 @@ class TransactionsController < ApplicationController
     end
 
     def transact_params
-        params.require(:transaction).permit(:name, :amount.to_f, :t_date, :user_id.to_i, :category_id.to_i, :transaction_type_id.to_i)
+        params.require(:transaction).permit(:name, :amount, :t_date, :user_id, :category_id, :transaction_type_id)
     end
 end
