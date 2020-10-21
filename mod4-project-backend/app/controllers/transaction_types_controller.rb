@@ -7,6 +7,7 @@ class TransactionTypesController < ApplicationController
     end
 
 
+
     def show
         @transaction_type
     end
