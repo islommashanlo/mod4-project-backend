@@ -1,3 +1,3 @@
-class TransactionSerializer < ActiveModel::Serializer
+class PlaidTokenSerializer < ActiveModel::Serializer
   attributes :id
 end
