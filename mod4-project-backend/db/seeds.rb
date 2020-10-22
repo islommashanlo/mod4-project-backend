@@ -72,11 +72,19 @@ Transaction.create(name: "Portfolio", amount: 6.66, t_date: "2020-03-01", catego
 
 Transaction.create(name: "Restaurant", amount: 100.00, t_date: "2020-03-12", category_id: din.id, transaction_type_id: debit.id, user_id: isa.id)
 Transaction.create(name: "Restaurant", amount: 110.00, t_date: "2020-03-13", category_id: din.id, transaction_type_id: debit.id, user_id: isa.id)
-Transaction.create(name: "Restaurant", amount: 134.00, t_date: "2020-03-14", category_id: din.id, transaction_type_id: debit.id, user_id: isa.id)
-Transaction.create(name: "Restaurant", amount: 222.00, t_date: "2020-03-15", category_id: din.id, transaction_type_id: debit.id, user_id: isa.id)
-Transaction.create(name: "Restaurant", amount: 99.00, t_date: "2020-03-16", category_id: din.id, transaction_type_id: debit.id, user_id: isa.id)
-Transaction.create(name: "Restaurant", amount: 188.00, t_date: "2020-03-17", category_id: din.id, transaction_type_id: debit.id, user_id: isa.id)
+Transaction.create(name: "Restaurant", amount: 121.00, t_date: "2020-03-14", category_id: din.id, transaction_type_id: debit.id, user_id: isa.id)
+Transaction.create(name: "Restaurant", amount: 155.00, t_date: "2020-03-15", category_id: din.id, transaction_type_id: debit.id, user_id: isa.id)
+Transaction.create(name: "Restaurant", amount: 168.00, t_date: "2020-03-16", category_id: din.id, transaction_type_id: debit.id, user_id: isa.id)
+Transaction.create(name: "Restaurant", amount: 200.00, t_date: "2020-03-17", category_id: din.id, transaction_type_id: debit.id, user_id: isa.id)
 Transaction.create(name: "Restaurant", amount: 250.00, t_date: "2020-03-18", category_id: din.id, transaction_type_id: debit.id, user_id: isa.id)
+
+Transaction.create(name: "Shopping", amount: 100.00, t_date: "2020-01-01", category_id: shop.id, transaction_type_id: debit.id, user_id: isa.id)
+Transaction.create(name: "Shopping", amount: 90.00, t_date: "2020-02-01", category_id: shop.id, transaction_type_id: debit.id, user_id: isa.id)
+Transaction.create(name: "Shopping", amount: 80.00, t_date: "2020-03-01", category_id: shop.id, transaction_type_id: debit.id, user_id: isa.id)
+Transaction.create(name: "Shopping", amount: 70.00, t_date: "2020-04-01", category_id: shop.id, transaction_type_id: debit.id, user_id: isa.id)
+Transaction.create(name: "Shopping", amount: 33.00, t_date: "2020-05-01", category_id: shop.id, transaction_type_id: debit.id, user_id: isa.id)
+
+
 
 # Budget
 Budget.create(name: bills.name, amount: 2000, category_id: bills.id, user_id: isa.id)

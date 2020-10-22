@@ -1,5 +1,5 @@
 class TransactionsController < ApplicationController
-    before_action :find_transaction, only: [:show, :update, :edit, :delete]
+    before_action :find_transaction, only: [:show, :update, :edit, :destroy]
 
     def index
         transacts = Transaction.all
@@ -13,6 +13,11 @@ class TransactionsController < ApplicationController
 
     def update
         @transaction.update(transact_params)
+        render json: @transaction
+    end
+
+    def destroy
+        @transaction.destroy
         render json: @transaction
     end
 
