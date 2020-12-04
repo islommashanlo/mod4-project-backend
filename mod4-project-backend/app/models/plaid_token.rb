@@ -1,0 +1,2 @@
+class PlaidToken < ApplicationRecord
+end
