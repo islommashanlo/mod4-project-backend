@@ -17,9 +17,9 @@ class TransactionsController < ApplicationController
     end
 
     def destroy
-        transact = @transaction.destroy
-        render json: transact
-    end 
+        @transaction.destroy
+        render json: @transaction
+    end
 
     private
 
