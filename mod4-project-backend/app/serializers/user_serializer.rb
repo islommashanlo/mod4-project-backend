@@ -18,7 +18,7 @@ class UserSerializer < ActiveModel::Serializer
     end
 
     def transactions
-        self.object.transactions.reverse
+        self.object.transactions.sort{|a,b| b.t_date <=> a.t_date}
     end
 
     def transacts_by_period
