@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::API
+
 #--API-CALL-------------------------------------------------------------    
     def api_call(url)
         uri = URI(url)
@@ -7,7 +8,7 @@ class ApplicationController < ActionController::API
     end
 # --Authorization---------------------------------------------------------
     def encode_token(payload)
-        JWT.encode(payload, ENV["app_secret"])
+        JWT.encode(payload, ENV['app_secret'])
     end
     
     def auth_header
@@ -18,7 +19,7 @@ class ApplicationController < ActionController::API
         if auth_header
             token = auth_header.split(' ')[1]
             begin
-            JWT.decode(token, ENV["app_secret"], true, algorithm: 'HS256')
+            JWT.decode(token, ENV['app_secret'], true, algorithm: 'HS256')
             rescue JWT::DecodeError
             nil
             end
