@@ -23,7 +23,8 @@ class UserSerializer < ActiveModel::Serializer
 
     def transacts_by_period
         all_dates = self.object.transactions.map{|e|e.t_date.split("-").first(2)}.uniq
-        all_dates.map{|e|{date: "#{e.join("-")}", values: self.object.transactions.select{|t|t.t_date.split("-").first(2).join("-") == e.join("-") }.flatten.map{|x|{category: x.category, total: x.category.transactions.select{|g|g.user_id==self.object.id && g.t_date.split("-").first(2).join("-") == e.join("-")}.sum{|ele|ele.amount}, transactions: x.category.transactions.select{|y|y.user_id==self.object.id && y.t_date.split("-").first(2).join("-") == e.join("-")}} }.uniq } }
+        t_by_period = all_dates.map{|e|{date: "#{e.join("-")}", values: self.object.transactions.select{|t|t.t_date.split("-").first(2).join("-") == e.join("-") }.flatten.map{|x|{category: x.category, total: x.category.transactions.select{|g|g.user_id==self.object.id && g.t_date.split("-").first(2).join("-") == e.join("-")}.sum{|ele|ele.amount}, transactions: x.category.transactions.select{|y|y.user_id==self.object.id && y.t_date.split("-").first(2).join("-") == e.join("-")}} }.uniq } }
+        t_by_period.reverse
     end
 
     def budgets
